@@ -51,8 +51,9 @@ jobs:
            composer install --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: vendor/bin/phpunit --coverage-text
+        run: vendor/bin/phpunit -vvv
         env:
           APP_KEY: base64:HLH0cxF5763xriH/ZVzoI8EcPWH/gmcPif+IsWH1mXY=
           DB_CONNECTION: mysql
+          DB_DATABASE: birdboard
           DB_USERNAME: root
