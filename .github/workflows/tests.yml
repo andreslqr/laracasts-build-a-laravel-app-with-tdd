@@ -51,7 +51,7 @@ jobs:
            composer install --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: vendor/bin/phpunit -vvv
+        run: vendor/bin/phpunit
         env:
           APP_KEY: base64:HLH0cxF5763xriH/ZVzoI8EcPWH/gmcPif+IsWH1mXY=
           DB_CONNECTION: mysql
