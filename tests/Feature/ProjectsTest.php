@@ -15,7 +15,7 @@ class ProjectsTest extends TestCase
     #[Test]
     public function a_user_can_create_a_project(): void
     {
-        $this->withExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $attributes = [
             'title' => $this->faker->sentence,
