@@ -22,10 +22,10 @@ class ProjectsTest extends TestCase
             'description' => $this->faker->paragraph()
         ];
 
-        $response = $this->post('/projects', $attributes);
-
-        // $response->assertStatus(201);
+        $this->post('/projects', $attributes);
 
         $this->assertDatabaseHas('projects', $attributes);
+
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 }
