@@ -18,4 +18,9 @@ class Project extends Model
         'title',
         'description'
     ];
+
+    public function path(): string
+    {
+        return route('projects.show', $this);
+    }
 }
