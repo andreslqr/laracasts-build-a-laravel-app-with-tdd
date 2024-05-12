@@ -28,7 +28,9 @@ class ProjectsTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $this->get("/projects/{$project->getKey()}")->assertSee($project->description);
+        $this->get("/projects/{$project->getKey()}")
+            ->assertSee($project->title)
+            ->assertSee($project->description);
     }
 
     #[Test]
