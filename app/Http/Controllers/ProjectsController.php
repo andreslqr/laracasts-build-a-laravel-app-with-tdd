@@ -38,6 +38,9 @@ class ProjectsController extends Controller
             ],
             'description' => [
                 'required'
+            ],
+            'owner_id' => [
+                'required'
             ]
         ]);
 
