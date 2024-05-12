@@ -2,25 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ProjectsTest extends TestCase
 {
-    use WithFaker;
     use RefreshDatabase;
 
     #[Test]
     public function a_user_can_create_a_project(): void
     {
-        $this->withoutExceptionHandling();
-
-        $attributes = [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph()
-        ];
+        $attributes = Project::factory()->raw();
 
         $this->post('/projects', $attributes);
 
@@ -32,6 +26,10 @@ class ProjectsTest extends TestCase
     #[Test]
     public function a_project_requires_a_title(): void
     {
-        $this->post('/projects', [])->assertSessionHasErrors('title');
+        $attributes = Project::factory()->raw([
+            'title' => null
+        ]);
+
+        $this->post('/projects', $attributes)->assertSessionHasErrors('title');
     }
 }
