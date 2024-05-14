@@ -77,13 +77,24 @@ class ProjectsTest extends TestCase
     }
 
     #[Test]
-    public function guests_cannot_view_a_single_proejct(): void
+    public function guests_cannot_view_a_single_project(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $project = Project::factory()->create();
+
+        $this->get($project->path())
+            ->assertStatus(403);
+    }
+
+    #[Test]
+    public function an_authenticated_user_cannot_view_the_projects_of_others()
     {
         $project = Project::factory()->create();
 
 
-        $this->get($project->path())
-            ->assertRedirect('login');
-        
+        $this->get($project->path());
     }
 }
