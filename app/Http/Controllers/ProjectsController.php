@@ -12,7 +12,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = auth()->user()
+                        ->projects()
+                        ->get();
 
         return view('projects.index', [
             'projects' => $projects

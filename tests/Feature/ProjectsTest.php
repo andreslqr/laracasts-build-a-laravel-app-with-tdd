@@ -30,8 +30,13 @@ class ProjectsTest extends TestCase
         $this->get('/projects')->assertSee($attributes['title']);
     }
 
+    public function guest_cannot_view_projects()
+    {
+        $this->get('/projects')->assertRedirect('login');
+    }
+
     #[Test]
-    public function a_user_can_view_a_project()
+    public function a_user_can_view_a_project(): void
     {
         $user = User::factory()->create();
 
@@ -62,12 +67,23 @@ class ProjectsTest extends TestCase
     }
 
     #[Test]
-    public function only_authenticated_users_can_create_projects()
+    public function guests_cannot_create_projects(): void
     {
         $attributes = Project::factory()->raw([
             'owner_id' => null
         ]);
 
         $this->post('/projects', $attributes)->assertRedirect('login');
+    }
+
+    #[Test]
+    public function guests_cannot_view_a_single_proejct(): void
+    {
+        $project = Project::factory()->create();
+
+
+        $this->get($project->path())
+            ->assertRedirect('login');
+        
     }
 }
