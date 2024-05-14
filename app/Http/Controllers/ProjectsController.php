@@ -43,7 +43,7 @@ class ProjectsController extends Controller
 
         $attributes['owner_id'] = auth()->id();
 
-        $project = Project::create($attributes);
+        Project::create($attributes);
 
 
         return redirect()->route('projects.index');
