@@ -38,13 +38,13 @@ class ProjectsController extends Controller
             ],
             'description' => [
                 'required'
-            ],
-            'owner_id' => [
-                'required'
             ]
         ]);
 
-        Project::create($attributes);
+        $attributes['owner_id'] = auth()->id();
+
+        $project = Project::create($attributes);
+
 
         return redirect()->route('projects.index');
     }

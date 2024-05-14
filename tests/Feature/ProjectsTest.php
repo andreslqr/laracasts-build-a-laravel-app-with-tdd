@@ -50,6 +50,6 @@ class ProjectsTest extends TestCase
             'owner_id' => null
         ]);
 
-        $this->post('/projects', $attributes)->assertSessionHasErrors('owner_id');
+        $this->post('/projects', $attributes)->assertRedirect('login');
     }
 }
