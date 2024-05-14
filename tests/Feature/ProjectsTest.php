@@ -92,9 +92,12 @@ class ProjectsTest extends TestCase
     #[Test]
     public function an_authenticated_user_cannot_view_the_projects_of_others()
     {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
         $project = Project::factory()->create();
 
-
-        $this->get($project->path());
+        $this->get($project->path())->assertStatus(403);
     }
 }

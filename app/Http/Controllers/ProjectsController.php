@@ -43,7 +43,7 @@ class ProjectsController extends Controller
             ]
         ]);
 
-        auth()->user()
+        $request->user()
             ->projects()
             ->create($attributes);
 
@@ -54,8 +54,10 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
+        abort_if($request->user()->cannot('view', $project), 403);
+
         return view('projects.show', [
             'project' => $project
         ]);
