@@ -19,6 +19,8 @@ class ProjectsTest extends TestCase
 
         $this->actingAs($user);
 
+        $this->get('/projects/create')->assertStatus(200);
+
         $attributes = Project::factory()->raw([
             'owner_id' => $user->getKey()
         ]);
