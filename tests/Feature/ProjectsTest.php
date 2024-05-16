@@ -32,9 +32,16 @@ class ProjectsTest extends TestCase
         $this->get('/projects')->assertSee($attributes['title']);
     }
 
-    public function guest_cannot_view_projects()
+    #[Test]
+    public function guest_cannot_view_projects(): void
     {
         $this->get('/projects')->assertRedirect('login');
+    }
+
+    #[Test]
+    public function guests_cannot_see_projects_form(): void
+    {
+        $this->get('/projects/create')->assertRedirect('login');
     }
 
     #[Test]
